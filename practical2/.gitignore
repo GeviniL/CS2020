@@ -1,0 +1,19 @@
+# Ignore all class files
+*.class
+
+# Ignore directories created by the Java build process
+bin/
+target/
+
+# Ignore files created by the Java runtime environment
+*.hprof
+*.log
+
+# Ignore files and directories created by IDEs and editors
+*.project
+*.classpath
+*.settings/
+.idea/
+*.iml
+*.swp
+
