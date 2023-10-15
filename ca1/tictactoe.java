@@ -150,6 +150,7 @@
                 row = scanner.nextInt()-1;
                 col = scanner.nextInt()-1;
             } while (!placeMark(row, col));
+            scanner.close();
         }
 
         // The main method.
@@ -179,4 +180,3 @@
             }
         }
     }
-
