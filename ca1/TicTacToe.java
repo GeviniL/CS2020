@@ -1,4 +1,5 @@
 
+    import java.util.InputMismatchException;
     import java.util.Scanner;
 
     // This class represents a TicTacToe game.
@@ -143,16 +144,31 @@
         public void makeMove() {
             Scanner scanner = new Scanner(System.in);
             int row, col;
-            do {
-                // Prompt the player to make a move.
-                System.out.println("Player " + getCurrentPlayer() + ", enter an empty row and column to place your mark!");
-                // Get the row and column from the player.
-                row = scanner.nextInt()-1;
-                col = scanner.nextInt()-1;
-            } while (!placeMark(row, col));
-            scanner.close();
+            boolean validInput = false;
+            while (!validInput) {
+                try {
+                    // Prompt the player to make a move.
+                    System.out.println("Player " + getCurrentPlayer() + ", enter an empty row and column to place your mark!");
+                    // Check if there is an integer to read.
+                    if (scanner.hasNextInt()) {
+                        // Get the row and column from the player.
+                        row = scanner.nextInt()-1;
+                        if (scanner.hasNextInt()) {
+                            col = scanner.nextInt()-1;
+                            validInput = placeMark(row, col);
+                        } else {
+                            System.out.println("Invalid input. Please enter the column as a number.");
+                        }
+                    } else {
+                        System.out.println("Invalid input. Please enter the row as a number.");
+                        scanner.nextLine(); // discard the rest of the line
+                    }
+                } catch (InputMismatchException e) {
+                    System.out.println("Invalid input. Please enter the row and column as numbers.");
+                    scanner.nextLine(); // discard the rest of the line
+                }
+            }
         }
-
         // The main method.
         public static void main(String[] args) {
             // Create a new game.
@@ -180,3 +196,4 @@
             }
         }
     }
+
